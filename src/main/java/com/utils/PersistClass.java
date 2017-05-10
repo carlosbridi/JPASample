@@ -6,32 +6,23 @@ import javax.persistence.Persistence;
 
 public abstract class PersistClass<T extends EntityId<?>> {
 
-	private static EntityManager entityManager;
-	
+		
 	public T save(T entity){
 		
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("projetosala");
-		entityManager = emf.createEntityManager();
-		
-		T entitySave = null;
+			EntityManagerFactory emf = Persistence.createEntityManagerFactory("projetosala");
+			EntityManager entityManager = emf.createEntityManager();
 		
 		entityManager.getTransaction().begin();
-		try{
-			if (entity.getId() != null){
-				entitySave = entityManager.merge(entity);
-			}else{
-				entityManager.persist(entity);
-				entitySave = entity;
-			}
-		}catch(Exception e){
-			entityManager.getTransaction().rollback();
+		T entitySaved = null;
+		if(entity.getId() != null) {
+			entitySaved = entityManager.merge(entity);
+		} else {
+			entityManager.persist(entity);
+			entitySaved = entity;
 		}
-		finally{
-			entityManager.getTransaction().commit();
-		}
-		
-		
-		return entitySave;
+		entityManager.getTransaction().commit();
+		entityManager.close();
+		return entitySaved;
 	}
 	
 }

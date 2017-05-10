@@ -4,11 +4,12 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="projetosala" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<class>com.sala.Sala</class>
+		<class>com.Pedido.Pedido</class>
+		<class>com.Produto.Produto</class>
+		<class>com.ItemPedido.ItemPedido</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/sala" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
-			<property name="javax.persistence.jdbc.password" value="sys" />
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
 
 			<property name="hibernate.show_sql" value="true" />
@@ -18,6 +19,7 @@
 			<property name="hibernate.hibernate.cache.use_query_cache"
 				value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="javax.persistence.jdbc.password" value="sys"/>
 			
 		</properties>
 		
